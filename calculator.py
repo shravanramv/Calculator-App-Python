@@ -1,20 +1,40 @@
 import flet as ft
 
-# Define custom button class with a circular shape
+# Define custom button class with a circular shape and click functionality
 class MyButton(ft.Container):
-    def __init__(self, text, is_operation=False, **kwargs):
+    def __init__(self, text, is_operation=False, result=None, **kwargs):
         super().__init__(
             content=ft.ElevatedButton(
                 text=text,
                 bgcolor=ft.colors.ORANGE_300 if is_operation else ft.colors.BLACK,
                 color=ft.colors.BLACK if is_operation else ft.colors.WHITE,
+                on_click=self.button_clicked,  # Set the click event handler
+                data=text,
                 **kwargs
             ),
-            width=80,  # Set fixed width and height for consistent circular shape
+            width=80,  # Fixed width and height for consistent circular shape
             height=80,
             border_radius=40,  # Border radius for perfect circle
             bgcolor=ft.colors.TRANSPARENT,
         )
+        self.result = result  # Reference to the result Text control
+
+    def button_clicked(self, e):
+        # Handle button clicks and update the result
+        if e.control.data == "AC":
+            self.result.value = "0"
+        elif e.control.data == "=":
+            try:
+                self.result.value = str(eval(self.result.value))
+            except:
+                self.result.value = "Error"
+        else:
+            if self.result.value == "0" or self.result.value == "Error":
+                self.result.value = e.control.data
+            else:
+                self.result.value += e.control.data
+        self.result.update()
+
 
 def main(page: ft.Page):
     page.title = "Calculator App"
@@ -38,45 +58,45 @@ def main(page: ft.Page):
                     ft.Row(
                         spacing=5,
                         controls=[
-                            MyButton(text="AC"),
-                            MyButton(text="+/-"),
-                            MyButton(text="%"),
-                            MyButton(text="/", is_operation=True),
+                            MyButton(text="AC", result=result),
+                            MyButton(text="+/-", result=result),
+                            MyButton(text="%", result=result),
+                            MyButton(text="/", is_operation=True, result=result),
                         ]
                     ),
                     ft.Row(
                         spacing=5,
                         controls=[
-                            MyButton(text="7"),
-                            MyButton(text="8"),
-                            MyButton(text="9"),
-                            MyButton(text="*", is_operation=True),
+                            MyButton(text="7", result=result),
+                            MyButton(text="8", result=result),
+                            MyButton(text="9", result=result),
+                            MyButton(text="*", is_operation=True, result=result),
                         ]
                     ),
                     ft.Row(
                         spacing=5,
                         controls=[
-                            MyButton(text="4"),
-                            MyButton(text="5"),
-                            MyButton(text="6"),
-                            MyButton(text="-", is_operation=True),
+                            MyButton(text="4", result=result),
+                            MyButton(text="5", result=result),
+                            MyButton(text="6", result=result),
+                            MyButton(text="-", is_operation=True, result=result),
                         ]
                     ),
                     ft.Row(
                         spacing=5,
                         controls=[
-                            MyButton(text="1"),
-                            MyButton(text="2"),
-                            MyButton(text="3"),
-                            MyButton(text="+", is_operation=True),
+                            MyButton(text="1", result=result),
+                            MyButton(text="2", result=result),
+                            MyButton(text="3", result=result),
+                            MyButton(text="+", is_operation=True, result=result),
                         ]
                     ),
                     ft.Row(
                         spacing=5,
                         controls=[
-                            MyButton(text="0"),
-                            MyButton(text="."),
-                            MyButton(text="=", is_operation=True),
+                            MyButton(text="0", result=result),
+                            MyButton(text=".", result=result),
+                            MyButton(text="=", is_operation=True, result=result),
                         ]
                     ),
                 ]
