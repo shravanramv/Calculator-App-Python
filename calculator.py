@@ -1,3 +1,4 @@
+# pip install flet
 import flet as ft
 
 # Function to handle button clicks
