@@ -1,8 +1,7 @@
 import flet as ft
 
 # Function to handle button clicks
-def button_clicked(e):
-    result = e.page.controls[0].controls[0].content.controls[1].controls[0].text
+def button_clicked(e, result):
     if e.control.data == "AC":
         result.value = "0"
     elif e.control.data == "=":
@@ -32,16 +31,15 @@ def main(page: ft.Page):
         nonlocal theme
         theme = "dark" if theme == "light" else "light"
         page.bgcolor = ft.colors.BLACK87 if theme == "dark" else ft.colors.WHITE
-        result.color = ft.colors.WHITE if theme == "dark" else ft.colors.BLACK
         result.update()
         for row in button_rows:
             for btn in row.controls:
-                btn.bgcolor = ft.colors.ORANGE_300 if btn.data in "/*-+=" else (ft.colors.BLACK if theme == "dark" else ft.colors.WHITE)
-                btn.color = ft.colors.BLACK if btn.bgcolor == ft.colors.ORANGE_300 or theme == "light" else ft.colors.WHITE
+                btn.bgcolor = ft.colors.ORANGE_300 if btn.data in "/*-+=" else (ft.colors.BLUE_GREY_900 if theme == "dark" else ft.colors.GREY_300)
+                btn.color = ft.colors.WHITE if theme == "dark" else ft.colors.BLACK
                 btn.update()
 
     # Display for the calculator
-    result = ft.Text(value="0", size=32, text_align="right", expand=True, weight="bold")
+    result = ft.Text(value="0", size=32, text_align="right", expand=True, weight="bold", color=ft.colors.BLACK)
 
     # Theme toggle button
     theme_toggle_btn = ft.IconButton(
@@ -67,9 +65,9 @@ def main(page: ft.Page):
             buttons.append(
                 ft.ElevatedButton(
                     text=text,
-                    bgcolor=ft.colors.ORANGE_300 if text in "/*-+=" else (ft.colors.BLACK if theme == "dark" else ft.colors.WHITE),
-                    color=ft.colors.BLACK if text in "/*-+=" or theme == "light" else ft.colors.WHITE,
-                    on_click=button_clicked,
+                    bgcolor=ft.colors.ORANGE_300 if text in "/*-+=" else (ft.colors.GREY_300 if theme == "light" else ft.colors.BLUE_GREY_900),
+                    color=ft.colors.WHITE if theme == "dark" else ft.colors.BLACK,
+                    on_click=lambda e: button_clicked(e, result),  # Pass `result` directly
                     data=text,
                     expand=True,
                     height=80
