@@ -1,4 +1,4 @@
-# Calculator App
+## Calculator App
 
 Basic calculator app in Python using Flet library
 
