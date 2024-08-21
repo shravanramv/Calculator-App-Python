@@ -10,19 +10,19 @@ class MyButton(ft.Container):
                 color=ft.colors.BLACK if is_operation else ft.colors.WHITE,
                 **kwargs
             ),
-            width=60,  # Adjust width and height for circular shape
-            height=60,
-            border_radius=30,  # Set border radius to half of width/height
+            width=80,  # Set fixed width and height for consistent circular shape
+            height=80,
+            border_radius=40,  # Border radius for perfect circle
             bgcolor=ft.colors.TRANSPARENT,
         )
 
 def main(page: ft.Page):
     page.title = "Calculator App"
     page.window.resizable = True
-    page.window.width = 400
-    page.window.height = 600
-    page.window.minimum_width = 400  # Set minimum width
-    page.window.minimum_height = 600  # Set minimum height
+    page.window.width = 350
+    page.window.height = 550
+    page.window.minimum_width = 350  # Set minimum width
+    page.window.minimum_height = 550  # Set minimum height
 
     result = ft.Text(value="0", size=32, text_align="right", expand=True, weight="bold")
 
@@ -32,12 +32,11 @@ def main(page: ft.Page):
             padding=10,
             content=ft.Column(
                 expand=True,
-                spacing=3,  # Further reduce space between rows
+                spacing=5,  # Spacing between rows
                 controls=[
                     ft.Row(controls=[result], alignment="end"),
                     ft.Row(
-                        expand=True,
-                        spacing=3,  # Reduce spacing between buttons further
+                        spacing=5,
                         controls=[
                             MyButton(text="AC"),
                             MyButton(text="+/-"),
@@ -46,8 +45,7 @@ def main(page: ft.Page):
                         ]
                     ),
                     ft.Row(
-                        expand=True,
-                        spacing=3,
+                        spacing=5,
                         controls=[
                             MyButton(text="7"),
                             MyButton(text="8"),
@@ -56,8 +54,7 @@ def main(page: ft.Page):
                         ]
                     ),
                     ft.Row(
-                        expand=True,
-                        spacing=3,
+                        spacing=5,
                         controls=[
                             MyButton(text="4"),
                             MyButton(text="5"),
@@ -66,8 +63,7 @@ def main(page: ft.Page):
                         ]
                     ),
                     ft.Row(
-                        expand=True,
-                        spacing=3,
+                        spacing=5,
                         controls=[
                             MyButton(text="1"),
                             MyButton(text="2"),
@@ -76,8 +72,7 @@ def main(page: ft.Page):
                         ]
                     ),
                     ft.Row(
-                        expand=True,
-                        spacing=3,
+                        spacing=5,
                         controls=[
                             MyButton(text="0"),
                             MyButton(text="."),
