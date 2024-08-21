@@ -17,19 +17,22 @@ def main(page: ft.Page):
     page.window.resizable = True
     page.window.width = 400
     page.window.height = 600
+    page.window.minimum_width = 400  # Set minimum width
+    page.window.minimum_height = 600  # Set minimum height
 
     result = ft.Text(value="0", size=32, text_align="right", expand=True, weight="bold")
 
     page.add(
         ft.Container(
             expand=True,
-            padding=20,
+            padding=10,
             content=ft.Column(
                 expand=True,
                 controls=[
                     ft.Row(controls=[result], alignment="end"),
                     ft.Row(
                         expand=True,
+                        spacing=5,  # Add spacing between buttons
                         controls=[
                             MyButton(text="AC", expand=True),
                             MyButton(text="+/-", expand=True),
@@ -39,6 +42,7 @@ def main(page: ft.Page):
                     ),
                     ft.Row(
                         expand=True,
+                        spacing=5,
                         controls=[
                             MyButton(text="7", expand=True),
                             MyButton(text="8", expand=True),
@@ -48,6 +52,7 @@ def main(page: ft.Page):
                     ),
                     ft.Row(
                         expand=True,
+                        spacing=5,
                         controls=[
                             MyButton(text="4", expand=True),
                             MyButton(text="5", expand=True),
@@ -57,6 +62,7 @@ def main(page: ft.Page):
                     ),
                     ft.Row(
                         expand=True,
+                        spacing=5,
                         controls=[
                             MyButton(text="1", expand=True),
                             MyButton(text="2", expand=True),
@@ -66,6 +72,7 @@ def main(page: ft.Page):
                     ),
                     ft.Row(
                         expand=True,
+                        spacing=5,
                         controls=[
                             MyButton(text="0", expand=True),
                             MyButton(text=".", expand=True),
